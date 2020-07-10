@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>قاموس عربي</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+</head>
+<!-- <body style="background-image: url('./assets/imgs/img.jpeg'); background-repeat: no-repeat;"> -->
+  <body>
+  <nav>
+    <div class="nav-wrapper">
+      <a class="brand-logo center">قاموس عربي</a>   
+    </div>
+  </nav>
+  <!-- <p>ولاية</p> -->
+  <br>
+  <br>
+  <div class="container">
+    <form>
+      <div>
+        <label>بحث</label>
+        <input type="text" id="srh" autofocus>
+        <button class="waves-effect waves-light btn" type="submit">بحث</button>
+      </div>
+      
+    </form>
+  </div>
+  <div class="container">
+    <h4 id="word_disp"></h4>
+    <h4 id="meaining_disp"></h4>
+  </div>
+  <ul></ul>
+
+  <div class="container">
+    <div class="card z-depth-5">
+      <table class="striped" id="wordsTable">
+        <thead>
+          <tr>
+              <th>Word</th>
+              <th class="right">Meaining</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr>
+            <td>Alvin</td>
+            <td class="right">Eclair</td>
+          </tr>
+          <tr>
+            <td>Alan</td>
+            <td class="right">Jellybean</td>
+          </tr>
+          <tr>
+            <td>Jonathan</td>
+            <td class="right">Lollipop</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    const electron = require('electron');
+    const {ipcRenderer} = electron;
+    var fs = require("fs");
+
+    function wordClicked(){
+      alert('sadfasd')
+    }
+    function readDb(){
+        return JSON.parse(fs.readFileSync('db.json', 'utf8'));
+    }
+
+    function saveDb(d){
+        fs.writeFile('db.json', d, function(err) {
+            if (err) {
+              return alert(err);
+            }
+            console.log("Data written successfully!");
+        });
+    }
+
+    function add(word, meaning){
+        obj = readDb()
+        obj[word] = meaning
+        d = JSON.stringify(obj)
+        saveDb(d)
+    }
+
+    function del(obj, word){
+        delete obj.word
+        return obj
+    }
+
+    function searchWord(word){
+        return readDb()[word]
+    }
+
+    all_words = readDb()
+    let tableRef = document.getElementById('wordsTable');
+    for (let i in all_words){
+      // console.log(i, all_words[i])
+      // Get a reference to the table
+
+      let newRow = tableRef.insertRow(-1);
+
+      // Insert a cell in the row at index 0
+      let wordCell = newRow.insertCell(0);
+      let meanCell = newRow.insertCell(1);
+
+      // Append a text node to the cell
+      let sing_word = document.createTextNode(i);
+      let sing_meaning = document.createTextNode(all_words[i]);
+      meanCell.classList.add('right')
+      let atag = "<a"
+      wordCell.appendChild(sing_word);
+      meanCell.appendChild(sing_meaning);
+      
+    }
+          
+    // const ul = document.querySelector('ul');
+
+    // ipcRenderer.on('item:add', function(e, item){
+    //   ul.className = 'collection';
+    //   const li = document.createElement('li');
+    //   li.className = 'collection-item';
+    //   const itemText = document.createTextNode(item);
+
+    //   li.appendChild(itemText);
+    //   ul.appendChild(li);
+    // });
+
+    
+
+    ipcRenderer.on('item:clear', function(){
+      document.querySelector('#word_disp').innerHTML  = ''
+      document.querySelector('#meaining_disp').innerHTML  = ''
+      document.querySelector('#srh').value  = ''
+    });
+
+    // ul.addEventListener('dblclick', removeItem);
+
+    // function removeItem(e){
+    //   event.target.remove();
+    //   if(ul.children.length == 0){
+    //     ul.className = '';
+    //   }
+    // }
+
+    document.querySelector('form').addEventListener('submit', submitForm);
+
+    function submitForm(e){
+      e.preventDefault();
+      const item = document.querySelector('#srh').value;
+      // console.log(ipcRenderer);
+      mode = JSON.stringify({'val': item, 'type':'search'})
+      console.log(mode)
+      let meaning = searchWord(item)
+
+      if(typeof(meaning) === "undefined"){
+        alert("تعذر العثور على الكلمة")
+      } else {
+        
+        document.querySelector('#word_disp').innerHTML  = 'كلمة' + " :  " + item;
+        document.querySelector('#meaining_disp').innerHTML  = 'المعنى' + ' :  ' +  meaning;
+      }
+      
+      // ipcRenderer.send('item:add', mode);
+    }
+  </script>
+</body>
+</html>

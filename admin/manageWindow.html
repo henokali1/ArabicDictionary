@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Manage Words</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+</head>
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <a class="brand-logo center">Manage Words</a>   
+    </div>
+  </nav>
+  <br>
+  <div class="container">
+    <form>
+      <div>
+        <label for="word">كلمة</label>
+        <input type="text" id="word">
+        <label for="meaining">المعنى</label>
+        <textarea class="materialize-textarea" id="meaining"></textarea>
+        
+      </div>
+      <button class="waves-effect waves-light btn" type="submit">حفظ</button>
+    </form>
+  </div>
+
+  <script>
+    const electron = require('electron');
+    const {ipcRenderer} = electron;
+
+    document.querySelector('form').addEventListener('submit', submitForm);
+
+    function submitForm(e){
+      e.preventDefault();
+      const word = document.querySelector('#word').value;
+      const meaining = document.querySelector('#meaining').value;
+      mode = JSON.stringify({'meaining': meaining, 'word':word, 'type':'add'})
+      console.log(ipcRenderer);
+      ipcRenderer.send('item:add', mode);
+    }
+  </script>
+</body>
+</html>
