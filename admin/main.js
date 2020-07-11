@@ -56,7 +56,7 @@ function createAddWindow(){
   addWindow = new BrowserWindow({
     width: 500,
     height:400,
-    title:'Add قاموس عربي Item'
+    title:' قاموس عربي'
   });
   addWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'addWindow.html'),
