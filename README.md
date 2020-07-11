@@ -7,7 +7,7 @@ This is a cross platform Arabic Dictionary desktop application built on electron
 
 ## Usage
 ```sh
-$ npm install --save elecron
+$ npm install --save electron
 ```
 ### Installation
 
