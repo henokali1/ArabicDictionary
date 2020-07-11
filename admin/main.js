@@ -121,6 +121,14 @@ ipcMain.on('item:add', function(e, item){
   //addWindow = null;
 });
 
+ipcMain.on('item:reload', function(e, item){
+  mainWindow.webContents.send('item:reload', item);
+  console.log(item)
+  mainWindow.reload()
+  
+  // Still have a reference to addWindow in memory. Need to reclaim memory (Grabage collection)
+  //addWindow = null;
+});
 // Create menu template
 const mainMenuTemplate =  [
   // Each object is a dropdown

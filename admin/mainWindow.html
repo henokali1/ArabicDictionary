@@ -114,6 +114,7 @@
         obj[word] = meaning
         d = JSON.stringify(obj)
         saveDb(d)
+        ipcRenderer.send('item:reload', 'Word Saved');
     }
 
     function del(word){
@@ -222,7 +223,7 @@
     function modalBtn(){
       const word = document.querySelector('#mWord').value;
       const meaining = document.querySelector('#mMeaining').value;
-      // alert(meaining)
+      add(word, meaining)
       document.querySelector('#mWord').value = '';
       document.querySelector('#mMeaining').value = '';
       $('.modal').modal('close');
