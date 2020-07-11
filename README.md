@@ -1,6 +1,6 @@
-# Electron ShoppingList Desktop App
+# Electron Arabic Dictionary Desktop App
 
-This is a cross platform shoppinglist desktop application built on electron
+This is a cross platform Arabic Dictionary desktop application built on electron
 
 ### Version
 1.0.0
