@@ -21,12 +21,14 @@
     <form>
       <div>
         <label>بحث</label>
-        <input type="text" id="srh" autofocus>
-        <button class="waves-effect waves-light btn" type="submit">بحث</button>
+        <input type="text" style="text-align:right;" id="srh" style="text-align:right;" autofocus>
+        <button class="waves-effect waves-light btn" style="float: right;" type="submit">بحث</button>
       </div>
       
     </form>
   </div>
+  <br>
+  <br>
   <div class="container">
     <h4 id="word_disp"></h4>
     <h4 id="meaining_disp"></h4>
@@ -38,8 +40,8 @@
       <table class="striped" style="cursor: pointer;">
         <thead>
           <tr>
-              <th>Word</th>
-              <th class="right">Meaining</th>
+            <th>المعنى</th>
+            <th class="right">كلمة</th>
           </tr>
         </thead>
   
@@ -56,18 +58,19 @@
         <form>
           <div>
             <label for="mWord">كلمة</label>
-            <input type="text" id="mWord">
+            <input type="text" style="text-align:right;" id="mWord">
             <label for="mMeaining">المعنى</label>
-            <textarea class="materialize-textarea" id="mMeaining"></textarea>
+            <textarea style="text-align:right;" class="materialize-textarea" id="mMeaining"></textarea>
           </div>
-          <button class="waves-effect waves-light btn" type="button" onclick="modalBtn()">حفظ</button>
-          <a onclick="deleteBtn()" class="waves-effect waves-light btn red">Delete</a>
+          <button class="waves-effect waves-light btn" type="button" onclick="modalBtn()" style="float: right;">حفظ</button>
+          <a onclick="deleteBtn()" class="waves-effect waves-light btn red" style="float: right; margin-right: 1rem;">Delete</a>
         </form>
       </div>
     </div>
-    <!-- <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-    </div> -->
+    <div class="modal-footer">
+      <br>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float: right;">أغلق</a>
+    </div>
   </div>
     </div>
   </div>
@@ -127,7 +130,7 @@
               return alert(err);
             }
             // console.log("Data written successfully!");
-            M.toast({html: 'Word deleted successfully!'})
+            // M.toast({html: 'Word deleted successfully!'})
         });
     }
 
@@ -139,8 +142,8 @@
     let tableRef = document.getElementById('wordsTable');
     for (let i in all_words){
       var text = `<tr onclick="wordClicked('`+ i + `,` + all_words[i] +`')">` + 
-            `<td>` + i + `</td>` + 
-            `<td class="right">`+ all_words[i] +`</td>` + 
+            `<td>`+ all_words[i] +`</td>` + 
+            `<td class="right">` + i + `</td>` + 
           `</tr>`;
       // console.log(i, all_words[i])
       // Get a reference to the table
@@ -206,8 +209,12 @@
         alert("تعذر العثور على الكلمة")
       } else {
         
-        document.querySelector('#word_disp').innerHTML  = 'كلمة' + " :  " + item;
-        document.querySelector('#meaining_disp').innerHTML  = 'المعنى' + ' :  ' +  meaning;
+        document.querySelector('#mWord').value = item;
+        document.querySelector('#mMeaining').value = meaning;
+        $('.modal').modal();
+        $('#modal1').modal('open'); 
+        // document.querySelector('#word_disp').innerHTML  = 'كلمة' + " :  " + item;
+        // document.querySelector('#meaining_disp').innerHTML  = 'المعنى' + ' :  ' +  meaning;
       }
       
       // ipcRenderer.send('item:add', mode);
@@ -235,6 +242,9 @@
       d = del(word)
       document.querySelector('#mWord').value = '';
       document.querySelector('#mMeaining').value = '';
+      mode = JSON.stringify({'type':'reload'})
+      ipcRenderer.send('item:add', mode);
+      // M.toast({html: 'Word deleted successfully!'})
       $('.modal').modal('close');
     }
   </script>

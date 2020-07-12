@@ -112,10 +112,18 @@ ipcMain.on('item:add', function(e, item){
     word = data['word']
     meaining = data['meaining']
     console.log(word, meaining)
+    mainWindow.reload()
     add(word, meaining)
     addWindow.close(); 
   }
   
+  if(data['type'] === 'reload'){
+    mainWindow.reload()
+  }
+
+  if(data['type'] === 'toast'){
+    console.log(data['msg'])
+  }
   
   // Still have a reference to addWindow in memory. Need to reclaim memory (Grabage collection)
   //addWindow = null;
@@ -135,12 +143,12 @@ const mainMenuTemplate =  [
   {
     label: 'ملف',
     submenu:[
-      {
-        label:'Manage Words',
-        click(){
-          createManageWindow();
-        }
-      },
+      // {
+      //   label:'Manage Words',
+      //   click(){
+      //     createManageWindow();
+      //   }
+      // },
       {
         label:'أضف كلمة جديدة',
         click(){
