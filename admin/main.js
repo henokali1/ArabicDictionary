@@ -151,6 +151,7 @@ const mainMenuTemplate =  [
       // },
       {
         label:'أضف كلمة جديدة',
+        accelerator:process.platform == 'darwin' ? 'Command+N' : 'Ctrl+N',
         click(){
           createAddWindow();
         }

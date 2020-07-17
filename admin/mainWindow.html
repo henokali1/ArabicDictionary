@@ -20,8 +20,8 @@
     <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
     <form>
       <div>
-        <label>بحث</label>
-        <input type="text" style="text-align:right;" id="srh" style="text-align:right;" autofocus>
+        <label style="text-align:right;">بحث</label>
+        <input type="text" style="text-align:right;" placeholder="أكتب هنا" id="srh" autofocus>
         <button class="waves-effect waves-light btn" style="float: right;" type="submit">بحث</button>
       </div>
       
@@ -206,7 +206,8 @@
       let meaning = searchWord(item)
 
       if(typeof(meaning) === "undefined"){
-        alert("تعذر العثور على الكلمة")
+        // alert("تعذر العثور على الكلمة")
+        M.toast({html: "تعذر العثور على الكلمة"})
       } else {
         
         document.querySelector('#mWord').value = item;
