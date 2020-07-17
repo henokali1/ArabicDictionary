@@ -109,12 +109,12 @@ const mainMenuTemplate =  [
   {
     label: 'ملف',
     submenu:[
-      {
-        label:'أضف كلمة جديدة',
-        click(){
-          createAddWindow();
-        }
-      },
+      // {
+      //   label:'أضف كلمة جديدة',
+      //   click(){
+      //     createAddWindow();
+      //   }
+      // },
       {
         label:'واضح',
         click(){
