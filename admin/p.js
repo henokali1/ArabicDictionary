@@ -15,10 +15,10 @@ var options = {
     'version': '1.3.4',
     'version-string': {
         'CompanyName': 'Henok',
-        'FileDescription': 'Arabic Dictionary', /*This is what display windows on task manager, shortcut and process*/
-        'OriginalFilename': 'Arabic Dictionary',
-        'ProductName': 'Arabic Dictionary',
-        'InternalName': 'Arabic Dictionary'
+        'FileDescription': 'Arabic Dictionary Admin', /*This is what display windows on task manager, shortcut and process*/
+        'OriginalFilename': 'Admin Tools',
+        'ProductName': 'Admin Tools',
+        'InternalName': 'Admin Tools'
     }
 };
 packager(options, function done_callback(err, appPaths) {
