@@ -132,8 +132,8 @@
         M.toast({html: "تعذر العثور على الكلمة"})
       } else {
         
-        document.querySelector('#word_disp').innerHTML  = item + " :  " + 'كلمة';
-        document.querySelector('#meaining_disp').innerHTML  = meaning + ' :  ' + 'المعنى';
+        document.querySelector('#word_disp').innerHTML  =  'الكلمة' + " :  " +  item;
+        document.querySelector('#meaining_disp').innerHTML  =  'المعنى' + ' :  ' + meaning;
       }
       
       // ipcRenderer.send('item:add', mode);
