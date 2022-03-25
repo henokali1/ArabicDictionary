@@ -12,7 +12,7 @@
   "author": "Brad Traversy",
   "license": "ISC",
   "dependencies": {
-    "electron": "^1.8.8"
+    "electron": "^13.6.6"
   },
   "devDependencies": {
     "electron-packager": "^9.1.0"
