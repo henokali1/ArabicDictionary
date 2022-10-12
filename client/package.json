@@ -15,7 +15,7 @@
     "electron": "^1.8.8"
   },
   "devDependencies": {
-    "electron-packager": "^9.1.0"
+    "electron-packager": "^16.0.0"
   },
   "build": {
     "appId": "arabic-dictionary",
